@@ -12,7 +12,7 @@ import { MainPageState } from './types';
 class Main extends Component {
 
   state: MainPageState = {
-    breadCrumbs: [
+    breadcrumbs: [
       {
         title: 'Main',
         pathname: '/'
