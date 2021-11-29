@@ -41,7 +41,7 @@ function CardView(props: any) {
                 </CardContent>
                 <CardActions>
                   <Button size="small">
-                    <Link to={'/devices/' + device.deviceId}>More details</Link>
+                    <Link to={`/devices/${device.deviceId}`}>More details</Link>
                   </Button>
                 </CardActions>
               </Card>

@@ -10,9 +10,11 @@ import TableView from '../TableView/TableView';
 import CardView from '../CardView/CardView';
 import Divider from '@mui/material/Divider';
 import { MainPageState } from './types';
+import {connect} from 'react-redux';
 
 import '../../index.css';
 import Navbar from '../core/Navbar/Navbar';
+import { handleGetAll } from '../../redux/actions/device';
 
 class Main extends Component {
   state: MainPageState = {
@@ -20,6 +22,10 @@ class Main extends Component {
       {
         title: "Main",
         pathname: "/",
+      },
+      {
+        title: "Devices",
+        pathname: "/devices",
       },
     ],
     devices: [
@@ -249,10 +255,12 @@ class Main extends Component {
         ],
       },
     ],
-    listView: true,
+    listView: false,
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    // TODO: get all devices
+  }
 
   toggleView = (bool: Boolean) => {
     this.setState({ listView: bool });
@@ -263,7 +271,7 @@ class Main extends Component {
       <React.Fragment>
         <Navbar />
         <Container maxWidth="lg" className="py-4">
-          {/* <BreadCrumb breadCrumbs={this.state.breadCrumbs} /> */}
+          <BreadCrumb breadcrumbs={this.state.breadcrumbs} />
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Autocomplete
@@ -308,4 +316,12 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = (state: MainPageState) => {
+  return {
+      devices: state.devices
+  }
+};
+
+export default connect(mapStateToProps, {
+  handleGetAll
+})(Main);

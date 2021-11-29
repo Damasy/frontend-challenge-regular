@@ -1,28 +1,37 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import { Breadcrumb } from "./types";
 
-function handleClick(event: MouseEvent) {
-  console.info(event, 'You clicked a breadcrumb.');
-};
+import '../../../index.css';
 
-function Breadcrumb() {
+function BreadCrumb(props: any) {
   return (
     // onClick={handleClick}
     <div role="presentation">
-      {/* <Breadcrumbs aria-label="breadcrumb">
-        props.breadCrumbs.map((one, index) => (
-          <React.Fragment>
-            <Link underline="hover" color="inherit" href={one.pathname}>
-              {one.title}
-            </Link>
-            index === props.breadCrumbs.length-1 && <Typography color="text.primary">{one.title}</Typography>
-          </React.Fragment>
-        ));
-      </Breadcrumbs> */}
+      <Breadcrumbs aria-label="breadcrumb" className="my-2">
+        {
+          props.breadcrumbs.map((one: Breadcrumb, index: number) => (
+            <div key={index+1}>
+              {
+                index < props.breadcrumbs.length-1 &&
+                <Typography sx={{ fontSize: 16 }} color="text.warning">
+                  <Link to={one.pathname}>
+                    {one.title}
+                  </Link>
+                </Typography>
+              }
+              {
+                index === props.breadcrumbs.length-1 &&
+                <Typography sx={{ fontSize: 16 }} color="text.primary">{one.title}</Typography>
+              }
+            </div>
+          ))
+        }
+      </Breadcrumbs>
     </div>
   )
 }
 
-export default Breadcrumb
+export default BreadCrumb

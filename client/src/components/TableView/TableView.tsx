@@ -11,7 +11,6 @@ function TableView(props: any) {
   });
 
   const handleRedirect = (deviceId: string) => {
-    debugger
     console.log(deviceId);
     let x;
     return x;
