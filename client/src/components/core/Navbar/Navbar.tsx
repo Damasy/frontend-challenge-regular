@@ -1,5 +1,5 @@
 import React from 'react';
-import RelayrLogo from '../../../Welcome/RelayrLogo';
+import RelayrLogo from '../../Welcome/RelayrLogo';
 
 import './navbar.css';
 

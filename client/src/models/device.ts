@@ -5,11 +5,12 @@ export interface Device {
   updatedAt: string;
   location: Location;
   deviceModel: string;
-  measurements: [[[number, string]]];
+  measurements: any;
   measurementModels: MeasurementModels[];
   alerts: Alert[];
   active: Boolean;
   zipCode: string;
+  metadata: any;
 }
 
 export interface Location {
@@ -28,6 +29,6 @@ export interface MeasurementModels {
   name: string;
   type: string;
   unit: string;
-  min: string;
-  max: string;
+  min: number;
+  max: number;
 }

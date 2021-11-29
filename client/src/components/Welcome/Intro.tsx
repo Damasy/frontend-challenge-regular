@@ -3,6 +3,7 @@ import RelayrLogo from "./RelayrLogo";
 import Typewritter from "./Typewriter";
 import DelayShow from "./DelayShow";
 import useWhenVisible from "./useWhenVisible.hook";
+import { Link } from 'react-router-dom';
 
 import "./intro.css";
 
@@ -50,7 +51,9 @@ function Intro() {
         <p>
           Are you ready?&nbsp;
           <span className="intro--mark">
-            <strong>Let's get started!</strong>
+            <strong>
+              <Link to="/devices">Let's get started!</Link>
+            </strong>
           </span>
         </p>
       </DelayShow>
