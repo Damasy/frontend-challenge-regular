@@ -95,6 +95,6 @@ const mapStateToProps = (state: DetailsPageState) => {
   }
 };
 
-export default withRouter(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   handleGetById
-})(DeviceDetails));
+})(withRouter(DeviceDetails));

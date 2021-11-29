@@ -5,4 +5,5 @@ export interface MainPageState {
   breadcrumbs: Breadcrumb[];
   devices: Device[];
   listView: Boolean;
+  searchTerm: string;
 }

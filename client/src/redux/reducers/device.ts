@@ -1,11 +1,11 @@
-import { GET_Device_BY_ID } from './../actions/device';
+import { GET_DEVICE_BY_ID } from './../actions/device';
 const initialState = {
   data: []
 };
 
 function Device(state = initialState, action: {type: string, payload: any}): any {
   switch (action.type) {
-  case GET_Device_BY_ID:
+  case GET_DEVICE_BY_ID:
     return {
       ...state,
       ...action.payload
@@ -14,7 +14,7 @@ function Device(state = initialState, action: {type: string, payload: any}): any
   default:
     return {
       ...state,
-      data: action.payload
+      ...action.payload
     }
   }
 }

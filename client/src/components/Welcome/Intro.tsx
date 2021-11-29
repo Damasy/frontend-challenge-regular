@@ -16,11 +16,11 @@ function Intro() {
     <article className="intro">
       <header className="intro-header">
         <RelayrLogo />
-        <DelayShow delay={2000}>
+        <DelayShow delay={1000}>
           <h2 className="intro-header--text">🏆 Hello Champ 👋</h2>
         </DelayShow>
       </header>
-      <DelayShow delay={3000}>
+      <DelayShow delay={1000}>
         <p className="intro-congrats">
           <Typewritter
             text={[
@@ -37,7 +37,7 @@ function Intro() {
           </DelayShow>
         </p>
       </DelayShow>
-      <DelayShow delay={13000}>
+      <DelayShow delay={2000}>
         <p className="intro-box">
           You will find all of the instructions in the&nbsp;
           <span className="intro--mark">README.md</span> file.
@@ -47,7 +47,7 @@ function Intro() {
           disposal.
         </p>
       </DelayShow>
-      <DelayShow delay={17000}>
+      <DelayShow delay={3000}>
         <p>
           Are you ready?&nbsp;
           <span className="intro--mark">

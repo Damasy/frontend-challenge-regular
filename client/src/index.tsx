@@ -6,18 +6,19 @@ import App from "./components/App/App";
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import combinedReducers from './redux/reducers/index';
+import middleware from './redux/middleware/index';
 
 import "./index.css";
 
-const store = createStore(combinedReducers);
+const store = createStore(combinedReducers, middleware);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter>
         <App />
-      </Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

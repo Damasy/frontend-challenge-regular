@@ -2,18 +2,18 @@ import { Device } from '../../models/device';
 import * as API from '../../services/device';
 
 export const GET_ALL_DEVICES = 'GET_ALL_DEVICES';
-export const GET_Device_BY_ID = 'GET_Device_BY_ID';
+export const GET_DEVICE_BY_ID = 'GET_Device_BY_ID';
 
 function getAllDevices(devices: Device[]) {
   return {
-    type: GET_Device_BY_ID,
+    type: GET_ALL_DEVICES,
     payload: devices
   };
 }
 
 function getDeviceById(device: Device) {
   return {
-    type: GET_ALL_DEVICES,
+    type: GET_DEVICE_BY_ID,
     payload: device
   };
 }

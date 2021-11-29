@@ -10,7 +10,7 @@ function BreadCrumb(props: any) {
   return (
     // onClick={handleClick}
     <div role="presentation">
-      <Breadcrumbs aria-label="breadcrumb" className="my-2">
+      <Breadcrumbs aria-label="breadcrumb" className="py-2">
         {
           props.breadcrumbs.map((one: Breadcrumb, index: number) => (
             <div key={index+1}>
