@@ -1,4 +1,4 @@
-import { GET_DEVICE_BY_ID, TOGGLE_DEIVCE_ACTIVE } from './../actions/device';
+import { GET_DEVICE_BY_ID, TOGGLE_DEIVCE_ACTIVE, TOGGLE_LIST_VIEW } from './../actions/device';
 const initialState = {
   data: []
 };
@@ -11,7 +11,6 @@ function Device(state: {data: any[]} = initialState, action: {type: string, payl
       ...action.payload
     };
   case TOGGLE_DEIVCE_ACTIVE:
-    console.log('5555555555', state)
     state.data = state.data.map(row => {
       if(row.deviceId === action.payload.deviceId) {
         row.active = action.payload.state
@@ -21,6 +20,11 @@ function Device(state: {data: any[]} = initialState, action: {type: string, payl
     return {
       ...state,
     }
+  case TOGGLE_LIST_VIEW:
+    return {
+      ...state,
+      listView: action.payload
+    };
 
   default:
     return {

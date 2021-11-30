@@ -5,6 +5,14 @@ import { toast } from 'react-toastify';
 export const GET_ALL_DEVICES = 'GET_ALL_DEVICES';
 export const GET_DEVICE_BY_ID = 'GET_Device_BY_ID';
 export const TOGGLE_DEIVCE_ACTIVE = 'TOGGLE_DEIVCE_ACTIVE';
+export const TOGGLE_LIST_VIEW = 'TOGGLE_LIST_VIEW';
+
+function toggleListView(state: boolean) {
+  return {
+    type: TOGGLE_LIST_VIEW,
+    payload: state
+  };
+}
 
 function getAllDevices(devices: Device[]) {
   return {
@@ -68,5 +76,11 @@ export function handleToggleState(deviceId: string, state: boolean) {
       toast.error('State toggle failed');
       // alert('There was an error. Try again.');
     })
+  }
+}
+
+export function handleListViewToggle(state: boolean) {
+  return (dispatch: any) => {
+    dispatch(toggleListView(state));
   }
 }

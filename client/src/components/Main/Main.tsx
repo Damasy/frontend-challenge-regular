@@ -15,7 +15,7 @@ import {connect} from 'react-redux';
 import '../../index.css';
 import Navbar from '../core/Navbar/Navbar';
 
-import { handleGetAll, handleToggleState } from '../../redux/actions/device';
+import { handleGetAll, handleToggleState, handleListViewToggle } from '../../redux/actions/device';
 import { Device } from '../../models/device';
 
 class Main extends Component <any, any> {
@@ -39,13 +39,14 @@ class Main extends Component <any, any> {
     this.props.handleGetAll();
   }
 
-  handeleSearch = (term: string) => {
+  handeleSearch = (term: string | null) => {
     console.log(term, 'search is starting...')
     this.setState({searchTerm: term});
   }
 
   toggleView = (bool: Boolean) => {
-    this.setState({ listView: bool });
+    // this.setState({ listView: bool });
+    this.props.handleListViewToggle(bool);
   };
 
   toggleActiveProp = (deviceId: string, bool: boolean) => {
@@ -63,14 +64,10 @@ class Main extends Component <any, any> {
             <Grid item xs={12}>
               <Autocomplete
                 id="search-devices"
-                onChange={(event: any, searchTerm: string) => {
-                  console.log(event, 'auto complete')
-                  console.log(searchTerm, 'auto complete value')
+                onChange={(event: any, searchTerm: any) => {
                   this.handeleSearch(searchTerm);
                 }}
-                freeSolo
-                disableClearable
-                options={this.props.devices.data.map((option: Device) => option.deviceName)}
+                options={Array.from(new Set(this.props.devices.data.map((option: Device) => option.deviceName)))}
                 renderInput={(params) => (
                   <TextField {...params} label="search with device name" />
                 )}
@@ -92,21 +89,21 @@ class Main extends Component <any, any> {
               md={4}
               justifyContent="flex-end"
             >
-              <Icon color={!this.state.listView ? "primary" : 'action'} onClick={() => this.toggleView(false)}>grid_view</Icon>
-              <Icon color={this.state.listView ? "primary" : 'action'} onClick={() => this.toggleView(true)}>table_rows</Icon>
+              <Icon color={!this.props.devices.listView ? "primary" : 'action'} onClick={() => this.toggleView(false)}>grid_view</Icon>
+              <Icon color={this.props.devices.listView ? "primary" : 'action'} onClick={() => this.toggleView(true)}>table_rows</Icon>
             </Grid>
           </Grid>
           <div className="pb-3">
-            {this.state.listView &&
+            {this.props.devices.listView &&
             <TableView
             toggleActive={this.toggleActiveProp}
             data={this.props.devices.data}
-            searchTerm={this.state.searchTerm} />}
-            {!this.state.listView &&
+            searchTerm={this.state.searchTerm || ''} />}
+            {!this.props.devices.listView &&
             <CardView
             toggleActive={this.toggleActiveProp}
             data={this.props.devices.data}
-            searchTerm={this.state.searchTerm} />}
+            searchTerm={this.state.searchTerm || ''} />}
           </div>
         </Container>
       </React.Fragment>
@@ -122,5 +119,6 @@ const mapStateToProps = (state: MainPageState) => {
 
 export default connect(mapStateToProps, {
   handleGetAll,
-  handleToggleState
+  handleToggleState,
+  handleListViewToggle
 })(Main);
