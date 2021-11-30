@@ -3,5 +3,5 @@ import { Breadcrumb } from "../core/Breadcrumb/types";
 
 export interface DetailsPageState {
   breadcrumbs: Breadcrumb[];
-  device: Device;
+  devices?: Device;
 }
