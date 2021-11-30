@@ -3,14 +3,10 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from "./reportWebVitals";
 import App from "./components/App/App";
-import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import combinedReducers from './redux/reducers/index';
-import middleware from './redux/middleware/index';
+import store from "./redux/store";
 
 import "./index.css";
-
-const store = createStore(combinedReducers, middleware);
 
 ReactDOM.render(
   <React.StrictMode>

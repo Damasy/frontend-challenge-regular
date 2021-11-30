@@ -8,7 +8,7 @@ export interface Device {
   measurements: any;
   measurementModels: MeasurementModels[];
   alerts: Alert[];
-  active: Boolean;
+  active: boolean;
   zipCode: string;
   metadata: any;
 }

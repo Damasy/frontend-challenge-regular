@@ -1,8 +1,10 @@
 import { Device } from '../../models/device';
 import * as API from '../../services/device';
+import store from '../store/index';
 
 export const GET_ALL_DEVICES = 'GET_ALL_DEVICES';
 export const GET_DEVICE_BY_ID = 'GET_Device_BY_ID';
+export const TOGGLE_DEIVCE_ACTIVE = 'TOGGLE_DEIVCE_ACTIVE';
 
 function getAllDevices(devices: Device[]) {
   return {
@@ -15,6 +17,13 @@ function getDeviceById(device: Device) {
   return {
     type: GET_DEVICE_BY_ID,
     payload: device
+  };
+}
+
+function toggleDeviceState(deviceId: string, state: boolean) {
+  return {
+    type: TOGGLE_DEIVCE_ACTIVE,
+    payload: {deviceId, state}
   };
 }
 
@@ -45,5 +54,17 @@ export function handleGetById(deviceId: string) {
         alert('There was an error. Try again.')
       })
     }
+  }
+}
+
+export function handleToggleState(deviceId: string, state: boolean) {
+  return async(dispatch: any) => {
+    await API.toggleActiveState(deviceId, state)
+    .then(res => {
+      dispatch(toggleDeviceState(deviceId, state))
+    })
+    .catch(() => {
+      alert('There was an error. Try again.')
+    })
   }
 }

@@ -15,7 +15,7 @@ import {connect} from 'react-redux';
 import '../../index.css';
 import Navbar from '../core/Navbar/Navbar';
 
-import { handleGetAll } from '../../redux/actions/device';
+import { handleGetAll, handleToggleState } from '../../redux/actions/device';
 import { Device } from '../../models/device';
 
 class Main extends Component <any, any> {
@@ -47,6 +47,11 @@ class Main extends Component <any, any> {
   toggleView = (bool: Boolean) => {
     this.setState({ listView: bool });
   };
+
+  toggleActiveProp = (deviceId: string, bool: boolean) => {
+    console.log(bool, ' active state is here for:: ', deviceId);
+    this.props.handleToggleState(deviceId, bool);
+  }
 
   render() {
     return (
@@ -93,7 +98,11 @@ class Main extends Component <any, any> {
           </Grid>
           <div className="pb-3">
             {this.state.listView && <TableView data={this.props.devices.data} searchTerm={this.state.searchTerm} />}
-            {!this.state.listView && <CardView data={this.props.devices.data} searchTerm={this.state.searchTerm} />}
+            {!this.state.listView &&
+            <CardView
+            toggleActive={this.toggleActiveProp}
+            data={this.props.devices.data}
+            searchTerm={this.state.searchTerm} />}
           </div>
         </Container>
       </React.Fragment>
@@ -108,5 +117,6 @@ const mapStateToProps = (state: MainPageState) => {
 };
 
 export default connect(mapStateToProps, {
-  handleGetAll
+  handleGetAll,
+  handleToggleState
 })(Main);

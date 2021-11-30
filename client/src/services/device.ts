@@ -15,6 +15,6 @@ export const toggleActiveState = (id: string, state: Boolean) => {
       'Content-Type': 'application/json'
     },
     method: 'PATCH',                                                              
-    body: JSON.stringify( { active: state } )                                        
+    body: JSON.stringify( { "active": state } )                                        
   })
 }
