@@ -97,7 +97,11 @@ class Main extends Component <any, any> {
             </Grid>
           </Grid>
           <div className="pb-3">
-            {this.state.listView && <TableView data={this.props.devices.data} searchTerm={this.state.searchTerm} />}
+            {this.state.listView &&
+            <TableView
+            toggleActive={this.toggleActiveProp}
+            data={this.props.devices.data}
+            searchTerm={this.state.searchTerm} />}
             {!this.state.listView &&
             <CardView
             toggleActive={this.toggleActiveProp}

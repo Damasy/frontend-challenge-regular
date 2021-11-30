@@ -21,8 +21,13 @@ function TableView(props: any) {
   });
 
   const handleRedirect = (deviceId: string) => {
-    console.log(deviceId);
     navigate(`/devices/${deviceId}`);
+    return;
+  }
+
+  const handleStateToggle = (deviceId: string, state: boolean) => {
+    console.log(props, 'props here ?');
+    props.toggleActive(deviceId, state)
     return;
   }
   
@@ -39,12 +44,18 @@ function TableView(props: any) {
       width: 100,
       getActions: (record: any) => {
         return [
-          <GridActionsCellItem
+          (<GridActionsCellItem
             label="More details"
             color="primary"
             showInMenu={true}
             onClick={() => handleRedirect(record.id)}
-          />
+          />),
+          (<GridActionsCellItem
+            label="Toggle active"
+            color="primary"
+            showInMenu={true}
+            onClick={() => handleStateToggle(record.id, !record.row.active)}
+          />)
         ];
       },
     }

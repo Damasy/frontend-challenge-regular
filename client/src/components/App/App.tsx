@@ -1,13 +1,13 @@
 import React from "react";
-import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Route, Routes } from 'react-router-dom';
-import Navbar from "../core/Navbar/Navbar";
 import Main from "../Main/Main";
 import Intro from "../Welcome/Intro";
 import DeviceDetails from "../DeviceDetails/DeviceDetails";
 
 import '../../index.css';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const routes = (
@@ -32,6 +32,17 @@ const App = () => {
     <React.Fragment>
       <CssBaseline />
       {routes}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </React.Fragment>
   )
 }

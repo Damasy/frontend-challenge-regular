@@ -1,6 +1,6 @@
 import { Device } from '../../models/device';
 import * as API from '../../services/device';
-import store from '../store/index';
+import { toast } from 'react-toastify';
 
 export const GET_ALL_DEVICES = 'GET_ALL_DEVICES';
 export const GET_DEVICE_BY_ID = 'GET_Device_BY_ID';
@@ -62,9 +62,11 @@ export function handleToggleState(deviceId: string, state: boolean) {
     await API.toggleActiveState(deviceId, state)
     .then(res => {
       dispatch(toggleDeviceState(deviceId, state))
+      toast.success('State toggled successfully');
     })
     .catch(() => {
-      alert('There was an error. Try again.')
+      toast.error('State toggle failed');
+      // alert('There was an error. Try again.');
     })
   }
 }
