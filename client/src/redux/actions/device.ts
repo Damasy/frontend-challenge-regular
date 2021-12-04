@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 export const GET_ALL_DEVICES = 'GET_ALL_DEVICES';
 export const GET_DEVICE_BY_ID = 'GET_Device_BY_ID';
-export const TOGGLE_DEIVCE_ACTIVE = 'TOGGLE_DEIVCE_ACTIVE';
+export const TOGGLE_DEVICE_STATE = 'TOGGLE_DEVICE_STATE';
 export const TOGGLE_LIST_VIEW = 'TOGGLE_LIST_VIEW';
 
 function toggleListView(state: boolean) {
@@ -30,7 +30,7 @@ function getDeviceById(device: Device) {
 
 function toggleDeviceState(deviceId: string, state: boolean) {
   return {
-    type: TOGGLE_DEIVCE_ACTIVE,
+    type: TOGGLE_DEVICE_STATE,
     payload: {deviceId, state}
   };
 }
@@ -55,8 +55,8 @@ export function handleGetById(deviceId: string) {
     const device = await API.getDeviceById(deviceId);
     if(device) {
       device.json()
-      .then(res => {
-        dispatch(getDeviceById(res));
+      .then(device => {
+        dispatch(getDeviceById(device));
       })
       .catch(() => {
         alert('There was an error. Try again.')

@@ -30,7 +30,6 @@ class Main extends Component <any, any> {
         pathname: "/devices",
       },
     ],
-    devices: [],
     listView: false,
     searchTerm: ''
   };
@@ -45,7 +44,6 @@ class Main extends Component <any, any> {
   }
 
   toggleView = (bool: Boolean) => {
-    // this.setState({ listView: bool });
     this.props.handleListViewToggle(bool);
   };
 
@@ -55,6 +53,9 @@ class Main extends Component <any, any> {
   }
 
   render() {
+    if(!this.props.devices.length) {
+      return (<h1>Loading...</h1>)
+    }
     return (
       <React.Fragment>
         <Navbar />
@@ -67,7 +68,7 @@ class Main extends Component <any, any> {
                 onChange={(event: any, searchTerm: any) => {
                   this.handeleSearch(searchTerm);
                 }}
-                options={Array.from(new Set(this.props.devices.data.map((option: Device) => option.deviceName)))}
+                options={Array.from(new Set(this.props.devices.map((option: Device) => option.deviceName)))}
                 renderInput={(params) => (
                   <TextField {...params} label="search with device name" />
                 )}
@@ -89,20 +90,20 @@ class Main extends Component <any, any> {
               md={4}
               justifyContent="flex-end"
             >
-              <Icon color={!this.props.devices.listView ? "primary" : 'action'} onClick={() => this.toggleView(false)}>grid_view</Icon>
-              <Icon color={this.props.devices.listView ? "primary" : 'action'} onClick={() => this.toggleView(true)}>table_rows</Icon>
+              <Icon color={!this.props.listView ? "primary" : 'action'} onClick={() => this.toggleView(false)}>grid_view</Icon>
+              <Icon color={this.props.listView ? "primary" : 'action'} onClick={() => this.toggleView(true)}>table_rows</Icon>
             </Grid>
           </Grid>
           <div className="pb-3">
-            {this.props.devices.listView &&
+            {this.props.listView &&
             <TableView
             toggleActive={this.toggleActiveProp}
-            data={this.props.devices.data}
+            data={this.props.devices}
             searchTerm={this.state.searchTerm || ''} />}
-            {!this.props.devices.listView &&
+            {!this.props.listView &&
             <CardView
             toggleActive={this.toggleActiveProp}
-            data={this.props.devices.data}
+            data={this.props.devices}
             searchTerm={this.state.searchTerm || ''} />}
           </div>
         </Container>
@@ -111,9 +112,10 @@ class Main extends Component <any, any> {
   }
 }
 
-const mapStateToProps = (state: MainPageState) => {
+const mapStateToProps = (state: any) => {
   return {
-      devices: state.devices
+      devices: state.devices.devices,
+      listView: state.devices.listView
   }
 };
 

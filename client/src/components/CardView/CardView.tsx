@@ -62,6 +62,7 @@ function CardView(props: any) {
                         {device.deviceName}
                       </Typography>
                       <FormControlLabel 
+                        className="pointer"
                         control={ 
                           <Switch
                             checked={device.active}
