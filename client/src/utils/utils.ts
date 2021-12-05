@@ -1,0 +1,1 @@
+export const uuid = (index: number) => '_' + Math.random().toString(36).substr(index, 9)

@@ -13,7 +13,6 @@ function Devices(
   state: { devices: any[], listView: boolean } = initialState,
   action: { type: string; payload: any }
 ): any {
-  debugger
   switch (action.type) {
     case GET_DEVICE_BY_ID:
       return {

@@ -19,6 +19,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Chip from '@mui/material/Chip';
 
 import '../../index.css';
+import LineChart from '../Charts/LineChart';
+import { uuid } from '../../utils/utils';
 
 class DeviceDetails extends Component <any, any> {
 
@@ -45,7 +47,7 @@ class DeviceDetails extends Component <any, any> {
   }
 
   render() {
-    if(!this.props.device.length) {
+    if(this.props.device.length !== 1) {
       return (<h1>Loading...</h1>)
     }
     return (
@@ -81,9 +83,10 @@ class DeviceDetails extends Component <any, any> {
                 Alerts
               </Typography>
               {
-                row.alerts.map((alert: any) => {
+                row.alerts.map((alert: any, index: number) => {
+                  let id = uuid(index);
                   return (
-                    <Accordion key={alert.name}>
+                    <Accordion key={id}>
                       <AccordionSummary
                         expandIcon={<Icon>keyboard_arrow_down</Icon>}
                         aria-controls="panel1bh-content"
@@ -113,6 +116,26 @@ class DeviceDetails extends Component <any, any> {
                         </Grid>
                       </AccordionDetails>
                     </Accordion>
+                  )
+                })
+              }
+              <Typography variant="h3" component="div" className="my-2">
+                Measurments
+              </Typography>
+              {
+                row.measurements.map((m: any[], index: number) => {
+                  let id = uuid(index);
+                  return (
+                    <React.Fragment>
+                      <LineChart
+                        key={id}
+                        data={m}
+                        name={row.measurementModels[index].name}
+                        unit={row.measurementModels[index].unit}
+                      />
+                      <br/>
+                      <br/>
+                    </React.Fragment>
                   )
                 })
               }
