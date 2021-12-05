@@ -20,6 +20,7 @@ import Chip from '@mui/material/Chip';
 
 import '../../index.css';
 import LineChart from '../Charts/LineChart';
+import Map from '../Maps/Map';
 import { uuid } from '../../utils/utils';
 
 class DeviceDetails extends Component <any, any> {
@@ -85,6 +86,7 @@ class DeviceDetails extends Component <any, any> {
               {
                 row.alerts.map((alert: any, index: number) => {
                   let id = uuid(index);
+                  console.log(id, 'alert ids')
                   return (
                     <Accordion key={id}>
                       <AccordionSummary
@@ -125,6 +127,7 @@ class DeviceDetails extends Component <any, any> {
               {
                 row.measurements.map((m: any[], index: number) => {
                   let id = uuid(index);
+                  console.log(id, 'measurments ids')
                   return (
                     <React.Fragment>
                       <LineChart
@@ -139,6 +142,10 @@ class DeviceDetails extends Component <any, any> {
                   )
                 })
               }
+              <Typography variant="h3" component="div" className="my-2">
+                Location
+              </Typography>
+              <Map location={row.location}/>
             </Container>
           )
         })}
