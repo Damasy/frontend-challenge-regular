@@ -43,7 +43,7 @@ function CardView(props: any) {
           // setCheck(device.active);
           devices.map((device: Device) => {
             return (
-              <Grid key={device.deviceId} container item xs={12} md={4} className="py-2">
+              <Grid key={device.deviceId} container item xs={12} md={4} className="py-2" data-testid="deviceCard">
                 <DeviceCard device={device} toggleActive={() => toggleState(device.deviceId, !device.active)} />
               </Grid>
             )}
