@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 function DeviceCard(props: any) {
   const device = props.device
   return (
-    <Card sx={{ width: "95%" }}>
+    <Card sx={{ width: "95%" }} data-testid="card">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {device.deviceModel}
@@ -24,13 +24,14 @@ function DeviceCard(props: any) {
           direction="row"
           justifyContent="space-between"
         >
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" data-testid="deviceName">
             {device.deviceName}
           </Typography>
           <FormControlLabel
             className="pointer"
             control={
               <Switch
+                data-testid="switch"
                 checked={device.active}
                 onChange={() =>
                   props.toggleActive()
