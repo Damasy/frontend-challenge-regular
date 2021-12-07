@@ -61,7 +61,7 @@ function TableView(props: any) {
     }
   ];
   return (
-    <div style={{ display: 'flex', height: '100%', width: '100%' }}>
+    <div style={{ display: 'flex', height: '100%', width: '100%' }} data-testid="table">
       <div style={{ flexGrow: 1 }}>
         <DataGrid rows={rows} pageSize={10} columns={columns} />
       </div>

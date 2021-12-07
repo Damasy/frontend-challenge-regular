@@ -30,7 +30,6 @@ class Main extends Component <any, any> {
         pathname: "/devices",
       },
     ],
-    listView: false,
     searchTerm: ''
   };
 
@@ -57,18 +56,24 @@ class Main extends Component <any, any> {
       return (<h1>Loading...</h1>)
     }
     return (
-      <React.Fragment>
+      <div data-testid="mainPage">
         <Navbar />
         <Container maxWidth="lg" className="py-4">
           <BreadCrumb breadcrumbs={this.state.breadcrumbs} />
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Autocomplete
-                id="search-devices"
+                data-testid="typeahead"
                 onChange={(event: any, searchTerm: any) => {
                   this.handeleSearch(searchTerm);
                 }}
-                options={Array.from(new Set(this.props.devices.map((option: Device) => option.deviceName)))}
+                options={Array.from(
+                  new Set(
+                    this.props.devices.map(
+                      (option: Device) => option.deviceName
+                    )
+                  )
+                )}
                 renderInput={(params) => (
                   <TextField {...params} label="search with device name" />
                 )}
@@ -78,7 +83,11 @@ class Main extends Component <any, any> {
           <Divider variant="middle" className="py-2" />
           <Grid container className="py-2">
             <Grid item xs={12} md={8}>
-              <Typography sx={{ fontSize: 18, fontWeight: 'bold' }} color="text.secondary" gutterBottom>
+              <Typography
+                sx={{ fontSize: 18, fontWeight: "bold" }}
+                color="text.secondary"
+                gutterBottom
+              >
                 Devices
               </Typography>
             </Grid>
@@ -90,24 +99,38 @@ class Main extends Component <any, any> {
               md={4}
               justifyContent="flex-end"
             >
-              <Icon color={!this.props.listView ? "primary" : 'action'} onClick={() => this.toggleView(false)}>grid_view</Icon>
-              <Icon color={this.props.listView ? "primary" : 'action'} onClick={() => this.toggleView(true)}>table_rows</Icon>
+              <Icon
+                color={!this.props.listView ? "primary" : "action"}
+                onClick={() => this.toggleView(false)}
+              >
+                grid_view
+              </Icon>
+              <Icon
+                color={this.props.listView ? "primary" : "action"}
+                onClick={() => this.toggleView(true)}
+              >
+                table_rows
+              </Icon>
             </Grid>
           </Grid>
           <div className="pb-3">
-            {this.props.listView &&
-            <TableView
-            toggleActive={this.toggleActiveProp}
-            data={this.props.devices}
-            searchTerm={this.state.searchTerm || ''} />}
-            {!this.props.listView &&
-            <CardView
-            toggleActive={this.toggleActiveProp}
-            data={this.props.devices}
-            searchTerm={this.state.searchTerm || ''} />}
+            {this.props.listView && (
+              <TableView
+                toggleActive={this.toggleActiveProp}
+                data={this.props.devices}
+                searchTerm={this.state.searchTerm || ""}
+              />
+            )}
+            {!this.props.listView && (
+              <CardView
+                toggleActive={this.toggleActiveProp}
+                data={this.props.devices}
+                searchTerm={this.state.searchTerm || ""}
+              />
+            )}
           </div>
         </Container>
-      </React.Fragment>
+      </div>
     );
   }
 }
