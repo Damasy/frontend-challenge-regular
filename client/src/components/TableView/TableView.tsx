@@ -51,7 +51,7 @@ function TableView(props: any) {
             onClick={() => handleRedirect(record.id)}
           />),
           (<GridActionsCellItem
-            label="Toggle active"
+            label="Toggle active state"
             color="primary"
             showInMenu={true}
             onClick={() => handleStateToggle(record.id, !record.row.active)}
