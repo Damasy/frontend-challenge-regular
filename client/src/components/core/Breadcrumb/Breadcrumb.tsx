@@ -8,8 +8,7 @@ import '../../../index.css';
 
 function BreadCrumb(props: any) {
   return (
-    // onClick={handleClick}
-    <div role="presentation">
+    <div role="presentation" data-testid="breadcrumbs">
       <Breadcrumbs aria-label="breadcrumb" className="py-2">
         {
           props.breadcrumbs.map((one: Breadcrumb, index: number) => (
