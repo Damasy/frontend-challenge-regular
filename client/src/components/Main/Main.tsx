@@ -22,7 +22,7 @@ class Main extends Component <any, any> {
   state: MainPageState = {
     breadcrumbs: [
       {
-        title: "Main",
+        title: "Home",
         pathname: "/",
       },
       {

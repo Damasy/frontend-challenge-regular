@@ -14,8 +14,6 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Icon from '@mui/material/Icon';
-import Slider from '@mui/material/Slider';
-import LinearProgress from '@mui/material/LinearProgress';
 import Chip from '@mui/material/Chip';
 
 import '../../index.css';
@@ -28,7 +26,7 @@ class DeviceDetails extends Component <any, any> {
   state: DetailsPageState = {
     breadcrumbs: [
       {
-        title: "Main",
+        title: "Home",
         pathname: "/",
       },
       {
@@ -52,7 +50,7 @@ class DeviceDetails extends Component <any, any> {
       return (<h1>Loading...</h1>)
     }
     return (
-      <React.Fragment>
+      <div data-testid="details">
         <Navbar />
         {this.props.device.map((row: any) => {
           return (
@@ -80,76 +78,83 @@ class DeviceDetails extends Component <any, any> {
               <Typography sx={{ mb: 1.5 }} color="text.secondary" className="mb-3">
                 {new Date(row.createdAt).toDateString()}
               </Typography>
-              <Typography variant="h3" component="div" className="mb-1">
-                Alerts
-              </Typography>
               {
-                row.alerts.map((alert: any, index: number) => {
-                  let id = uuid(index);
-                  console.log(id, 'alert ids')
-                  return (
-                    <Accordion key={id}>
-                      <AccordionSummary
-                        expandIcon={<Icon>keyboard_arrow_down</Icon>}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                      >
-                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                          {alert.name}
-                        </Typography>
-                        {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                          {new Date(alert.timestamp).toDateString()}
-                        </Typography>
-                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                        Severity: {alert.severity}
-                        </Typography>
-                        {/* <LinearProgress variant="determinate" value={((alert.severity - 0) * 100) / (10 - 0)} />
-                        <Slider defaultValue={alert.severity} step={1}
-                        valueLabelDisplay="on" marks min={0} max={10} disabled /> */}
-                        <Grid container className="py-2">
-                          <Typography sx={{ mb: 1.5 }} style={{marginRight: 16}}>
-                            State: 
-                          </Typography>
-                          <Chip label={alert.state} variant="outlined"
-                          color={alert.state === 'set' ? 'success' : 'error'} />
-                        </Grid>
-                      </AccordionDetails>
-                    </Accordion>
-                  )
-                })
+                row.alerts && <div>
+                  <Typography variant="h3" component="div" className="mb-1">
+                    Alerts
+                  </Typography>
+                  {
+                    row.alerts.map((alert: any, index: number) => {
+                      let id = uuid(index);
+                      console.log(id, 'alert ids')
+                      return (
+                        <Accordion key={id}>
+                          <AccordionSummary
+                            expandIcon={<Icon>keyboard_arrow_down</Icon>}
+                            aria-controls="panel1bh-content"
+                            id="panel1bh-header"
+                          >
+                            <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                              {alert.name}
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              {new Date(alert.timestamp).toDateString()}
+                            </Typography>
+                            <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                            Severity: {alert.severity}
+                            </Typography>
+                            <Grid container className="py-2">
+                              <Typography sx={{ mb: 1.5 }} style={{marginRight: 16}}>
+                                State: 
+                              </Typography>
+                              <Chip label={alert.state} variant="outlined"
+                              color={alert.state === 'set' ? 'success' : 'error'} />
+                            </Grid>
+                          </AccordionDetails>
+                        </Accordion>
+                      )
+                    })
+                  }
+                </div>
               }
-              <Typography variant="h3" component="div" className="my-2">
-                Measurments
-              </Typography>
               {
-                row.measurements.map((m: any[], index: number) => {
-                  let id = uuid(index);
-                  console.log(id, 'measurments ids')
-                  return (
-                    <React.Fragment>
-                      <LineChart
-                        key={id}
-                        data={m}
-                        name={row.measurementModels[index].name}
-                        unit={row.measurementModels[index].unit}
-                      />
-                      <br/>
-                      <br/>
-                    </React.Fragment>
-                  )
-                })
+                row.measurements && <div>
+                  <Typography variant="h3" component="div" className="my-2">
+                    Measurments
+                  </Typography>
+                  {
+                    row.measurements.map((m: any[], index: number) => {
+                      let id = uuid(index);
+                      console.log(id, 'measurments ids')
+                      return (
+                        <React.Fragment>
+                          <LineChart
+                            key={id}
+                            data={m}
+                            name={row.measurementModels[index].name}
+                            unit={row.measurementModels[index].unit}
+                          />
+                          <br/>
+                          <br/>
+                        </React.Fragment>
+                      )
+                    })
+                  }
+                </div>
               }
-              <Typography variant="h3" component="div" className="my-2">
-                Location
-              </Typography>
-              <Map location={row.location}/>
+              {
+                row.location && <div>
+                <Typography variant="h3" component="div" className="my-2">
+                  Location
+                </Typography>
+                <Map location={row.location}/>
+              </div>}
             </Container>
           )
         })}
-      </React.Fragment>
+      </div>
     );
   }
 }

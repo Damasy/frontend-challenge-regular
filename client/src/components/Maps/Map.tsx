@@ -1,25 +1,25 @@
 import React from "react";
-import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import Mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../../index.css';
 
 function Map(props: any) {
-  mapboxgl.accessToken =
+  Mapboxgl.accessToken =
     "pk.eyJ1IjoiYWRhbWFzeSIsImEiOiJja3d0NXRzcWYwNXNqMnBtaTRxa2tzOXFnIn0.w9kurY0brb2l_65r6wsCJA";
   const mapContainer:any = React.useRef({});
   const map: any = React.useRef(null);
 
   React.useEffect(() => {
     if (map.current) return; // initialize map only once
-    map.current = new mapboxgl.Map({
+    map.current = new Mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [props.location.lon, props.location.lat],
       zoom: 8,
     });
     // Create a default Marker and add it to the map.
-    new mapboxgl.Marker()
+    new Mapboxgl.Marker()
     .setLngLat([props.location.lon, props.location.lat])
     .addTo(map.current);
   });

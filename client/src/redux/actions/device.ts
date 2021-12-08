@@ -21,7 +21,7 @@ function getAllDevices(devices: Device[]) {
   };
 }
 
-function getDeviceById(device: Device) {
+export function getDeviceById(device: Device) {
   return {
     type: GET_DEVICE_BY_ID,
     payload: device
